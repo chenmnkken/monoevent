@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name=viewport content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>tap</title>
+<style>
+html,body{ height:100%; -webkit-user-select:none; user-select:none; }
+.box{ width:100px; height:100px; background:#333; position:absolute; top:100px; right:0px; }
+.box2{ width:100px; height:100px; background:#333; position:absolute; top:300px; right:0px; }
+.btn{ position: absolute; top:10px; right:10px; width:80px; height:25px; }
+</style>
+</head>
+<body>
+
+<div style="padding:3px;background:#09c;color:#fff;line-height:18px;position:fixed;top:0;left:0;" id="log"></div>
+<button id="btn" class="btn">click</button>
+<div id="box" class="box"></div>
+<div id="box2" class="box box2"></div>
+
+<script src="../monoevent.js"></script>
+<script>
+
+(function(){
+
+var ne = MonoEvent,
+	$box = ne( '#box' ),
+	$box2 = ne( '#box2' ),
+	$btn = ne( '#btn' ),
+	$body = ne( 'body' ),
+	log = document.getElementById( 'log' );
+
+var tap1 = function( e ){
+	log.innerHTML += 'tap1<br/>';
+};
+
+$box.on( 'tap', tap1 );
+
+$btn.one( 'click', function(){
+	$box.un( 'tap' );
+});
+
+})();
+
+</script>
+
+</body>
+</html>
