@@ -3,32 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name=viewport content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>ltap</title>
+  <title>longTap事件测试</title>
 <style>
-html,body{ height:100%; }
-.box{ width:100px; height:100px; background:#333; position:absolute; top:100px; right:0px; }
-.btn{ position: absolute; top:10px; right:10px; width:80px; height:25px; }
+html,body{ height:100%; -webkit-user-select:none; user-select:none; }
+h2{ text-align:right; }
+.box{ width:100px; height:100px; background:#333; position:absolute; top:130px; right:0px; line-height: 100px; text-align:center; color:#ddd; }
+.btn{ position: absolute; top:80px; right:10px; width:80px; height:25px; }
+pre{ position: absolute; top:255px; left:0; background: #f5f5f5; width:100%; margin:0; padding:10px; -webkit-box-sizing:border-box;  -ms-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing:border-box; font-size:12px; font-family: Monaco,Consolas,"Lucida Console",monospace; z-index:1; }
 </style>
 </head>
 <body>
 
+<h2>longTap事件测试</h1>
+<hr>
+
 <div style="padding:3px;background:#09c;color:#fff;line-height:18px;position:fixed;top:0;left:0;" id="log"></div>
-<button id="btn" class="btn">click</button>
-<div id="box" class="box"></div>
+<button id="btn" class="btn">卸载事件</button>
+<div id="box" class="box">触发事件</div>
+
+<pre>
+var ne = MonoEvent,
+  $box = ne( '#box' ),
+  $btn = ne( '#btn' ),
+  log = document.getElementById( 'log' );
+
+$box.on( 'longTap', function(){
+  log.innerHTML += 'longTap&lt;br/&gt;';
+});
+
+$btn.one( 'click', function(){
+  $box.un( 'longTap' );
+});
+</pre>
 
 <script src="../monoevent.js"></script>
 <script>
 (function(){
 
-var $box = MonoEvent( '#box' ),
-	$btn = MonoEvent( '#btn' ),
+var ne = MonoEvent,
+	$box = ne( '#box' ),
+	$btn = ne( '#btn' ),
 	log = document.getElementById( 'log' );
 
 $box.on( 'longTap', function(){
 	log.innerHTML += 'longTap<br/>';
 });
 
-$btn.on( 'click', function(){
+$btn.one( 'click', function(){
 	$box.un( 'longTap' );
 });
 

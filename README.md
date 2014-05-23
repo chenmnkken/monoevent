@@ -3,6 +3,9 @@ MonoEvent 是专门用于处理移动端的事件多投绑定、卸载、代理�
 ***
 ### [使用文档](https://github.com/chenmnkken/monoevent/wiki/MonoEvent-的使用文档)
 ***
+### [example](http://stylechen.com/wp-content/uploads/demo/monoevent/test/index.html)
+<img src="http://p4.qhimg.com/t01b3af33dfedc1edd9.png" width="280" height="280">
+***
 ### 问题反馈
 有任何问题欢迎提交 [issue](https://github.com/chenmnkken/monoevent/issues/new)
 ***

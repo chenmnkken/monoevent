@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name=viewport content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>tap事件测试</title>
+  <title>touchstart事件测试</title>
 <style>
 html,body{ height:100%; -webkit-user-select:none; user-select:none; }
 h2{ text-align:right; }
@@ -14,7 +14,7 @@ pre{ position: absolute; top:255px; left:0; background: #f5f5f5; width:100%; mar
 </head>
 <body>
 
-<h2>tap事件测试</h1>
+<h2>touchstart事件测试</h1>
 <hr>
 <div style="padding:3px;background:#09c;color:#fff;line-height:18px;position:fixed;top:0;left:0;z-index:2;" id="log"></div>
 <button id="btn" class="btn">卸载事件</button>
@@ -26,12 +26,12 @@ var ne = MonoEvent,
   $btn = ne( '#btn' ),
   log = document.getElementById( 'log' );
 
-$box.on( 'tap', function(){
-  log.innerHTML += 'tap&lt;br/&gt;';
+$box.on( 'touchstart', function(){
+  log.innerHTML += 'touchstart&lt;br/&gt;';
 });
 
 $btn.one( 'click', function(){
-  $box.un( 'tap' );
+  $box.un( 'touchstart' );
 });
 </pre>
 
@@ -45,12 +45,12 @@ var ne = MonoEvent,
 	$btn = ne( '#btn' ),
 	log = document.getElementById( 'log' );
 
-$box.on( 'tap', function(){
-	log.innerHTML += 'tap<br/>';
+$box.on( 'touchstart', function(){
+	log.innerHTML += 'touchstart<br/>';
 });
 
 $btn.one( 'click', function(){
-	$box.un( 'tap' );
+	$box.un( 'touchstart' );
 });
 
 })();
