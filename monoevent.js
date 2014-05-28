@@ -5,7 +5,7 @@
 * Released under the MIT Licenses
 *
 * Mail : chenmnkken@gmail.com
-* Date : 2014-05-21
+* Date : 2014-05-28
 */
 
 (function( define, window ){
@@ -344,7 +344,6 @@ eventHooks.swipe = {
 
                 touchmove : function( e ){
                     isTouchMove = true;
-                    e.preventDefault();
                 },
 
                 touchend : function( e ){
