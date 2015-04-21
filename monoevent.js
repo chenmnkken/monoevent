@@ -1,11 +1,11 @@
 /*
 * MonoEvent Beta
 * Event library for mobile
-* Copyright (c) 2014 Yiguo Chan
+* Copyright (c) Yiguo Chan
 * Released under the MIT Licenses
 *
 * Mail : chenmnkken@gmail.com
-* Date : 2014-05-28
+* Date : 2015-04-21
 */
 
 (function( define, window ){
@@ -133,12 +133,12 @@ eventHooks.doubleTap = {
             firstTouchEnd = true,
             lastTime = 0,
             lastTx = null,
-            lastTy = null,            
+            lastTy = null,
             startTx, startTy, dTapTimer, startTime,
 
             handles = {
 
-                touchstart : function( e ){     
+                touchstart : function( e ){
                     if( dTapTimer ){
                         clearTimeout( dTapTimer );
                         dTapTimer = null;
@@ -159,7 +159,7 @@ eventHooks.doubleTap = {
 
                     e.type = options.type;
 
-                    if( Math.abs(startTx - endTx) < 6 && Math.abs(startTx - endTx) < 6 ){
+                    if( Math.abs(startTx - endTx) < 6 && Math.abs(startTy - endTy) < 6 ){
                         if( duration < 501 ){
                             if( lastTx !== null &&
                                 Math.abs(lastTx - endTx) < 45 &&
@@ -206,7 +206,7 @@ eventHooks.doubleTap = {
                                     handles.forEach(function( item ){
                                         e.isFake = true;
                                         item.handle( e );
-                                    });            
+                                    });
 
                                     firstTouchEnd = true;
                                     lastTx = lastTy = null;
@@ -243,9 +243,9 @@ eventHooks.doubleTap = {
             }
         }
 
-        ne.addSpecialEvent( options, handles, this.types, originalHandle );    
+        ne.addSpecialEvent( options, handles, this.types, originalHandle );
     },
-    
+
     teardown : function( options ){
         this.types.forEach(function( item ){
             var newOptions = ne.mergeOptions( options, item, true );
@@ -260,11 +260,11 @@ eventHooks.doubleTap = {
                     type : item,
                     dataName : item,
                     namespace : 'likedoubleTap',
-                    capture : true  
+                    capture : true
                 });
             });
         }
-    }    
+    }
 };
 
 eventHooks.longTap = {
@@ -282,9 +282,9 @@ eventHooks.longTap = {
 
             handles = {
 
-                touchstart : function( e ){     
+                touchstart : function( e ){
                     if( lTapTimer ){
-                        clearTimer();                    
+                        clearTimer();
                     }
 
                     var touches = e.touches[0],
@@ -307,21 +307,21 @@ eventHooks.longTap = {
                         moveTy = touches.clientY;
 
                     if( lTapTimer && (Math.abs(moveTx - startTx) > 5 || Math.abs(moveTy - startTy) > 5) ){
-                        clearTimer();                            
+                        clearTimer();
                     }
                 },
 
                 touchend : function(){
                     if( lTapTimer ){
-                        clearTimer();                            
+                        clearTimer();
                     }
                 }
 
             };
 
-        ne.addSpecialEvent( options, handles, this.types, originalHandle );    
+        ne.addSpecialEvent( options, handles, this.types, originalHandle );
     }
-    
+
 };
 
 eventHooks.swipe = {
@@ -334,7 +334,7 @@ eventHooks.swipe = {
 
             handles = {
 
-                touchstart : function( e ){     
+                touchstart : function( e ){
                     var touches = e.touches[0];
 
                     startTx = touches.clientX;
@@ -349,7 +349,7 @@ eventHooks.swipe = {
                 touchend : function( e ){
                     if( !isTouchMove ){
                         return;
-                    }    
+                    }
 
                     var touches = e.changedTouches[0],
                         endTx = touches.clientX,
@@ -376,18 +376,18 @@ eventHooks.swipe = {
                     }
                     else{
                         if( distanceY > 20 ){
-                            isSwipe = true;                            
+                            isSwipe = true;
                             if( options.type === 'swipeUp' ){
                                 originalHandle.call( this, e );
                             }
                         }
                         else if( distanceY < -20 ){
-                            isSwipe = true;     
+                            isSwipe = true;
                             if( options.type === 'swipeDown' ){
                                 originalHandle.call( this, e );
-                            }                            
+                            }
                         }
-                    }                                
+                    }
 
                     if( isSwipe && options.type === 'swipe' ){
                         originalHandle.call( this, e );
@@ -396,9 +396,9 @@ eventHooks.swipe = {
 
             };
 
-        ne.addSpecialEvent( options, handles, this.types, originalHandle );    
+        ne.addSpecialEvent( options, handles, this.types, originalHandle );
     }
-    
+
 };
 
 eventHooks.longTap.teardown = eventHooks.swipe.teardown = eventHooks.tap.teardown;
@@ -437,7 +437,7 @@ var ne = {
             dataName = 'special_' + ( selector ? selector + '_' : '' ) + 'doubleTap_touchend',
             flag = false,
             data;
-        
+
         while( target ){
             if( selector ){
                 data = ne.data( elem, dataName );
@@ -588,7 +588,7 @@ var ne = {
 
     /*
      * 添加特殊事件的handle缓存
-     * @param { HTMLElement } 
+     * @param { HTMLElement }
      * @param { Function } 原事件处理器
      * @param { Object } 配置对象
      * @param { Object } 用于模拟各种类型的事件处理器
@@ -597,7 +597,7 @@ var ne = {
         var specialName, specialData, name, item;
 
         if( options.type === 'doubleTap' ){
-            doubleTapSetupCount++;    
+            doubleTapSetupCount++;
         }
 
         for( name in handles ){
@@ -1130,16 +1130,16 @@ window.MonoEvent = MonoEvent;
 
 });
 
-})( typeof define === 'function' && (define.amd || define.cmd) ? define : 
-    function ( name, deps, factory ) { 
+})( typeof define === 'function' && (define.amd || define.cmd) ? define :
+    function ( name, deps, factory ) {
         if( typeof name === 'function' ){
             factory = name;
         }
-        
+
         if( typeof deps === 'function' ){
             factory = deps;
         }
-        
+
         if( factory ){
             factory();
         }
